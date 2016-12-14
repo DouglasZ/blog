@@ -1,0 +1,24 @@
+  <div class="comments comments-info" id="callout-glyphicons-dont-mix">
+    <h4><%= comment.commenter %></h4>
+    <p><%= comment.body %></p>
+    <div class="buttons-comment">
+      <div id="<%= comment.id %>" class="answer-comment" title="Answer">
+          <span class="glyphicon glyphicon-share-alt"></span>
+      </div>
+      <div>
+        <%= link_to [comment.article, comment], method: :delete, data: { confirm: 'Are you sure?' }, title:'Delete' do %>
+            <span class="glyphicon glyphicon-trash"></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% comment.comments.each do |comment| %>
+      <%= render 'comments/answer', comment: comment %>
+  <% end %>
+
+
+<div class="show-answer-comment comment-<%= comment.id %>" style="display:none;">
+  <div style="height: 202px; padding-left: 15px;">
+    <%= render 'comments/form', comment: comment.comments.build(article_id: comment.article_id) %>
+  </div>
+</div>

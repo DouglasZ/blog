@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="page-header">
+    <div class="container-fluid">
+      <h1>Details</h1>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="whiteframe">
+      <div class="whiteframe-header">
+        <span><%= @article.title %></span>
+      </div>
+      <div class="whiteframe-body">
+        <div class="text-article">
+          <p><%= @article.text %></p>
+          <div class="display-flex end">
+            <%= link_to 'Back', articles_path, class:'btn btn-default custom-button', style:'margin-right:5px'%>
+            <%= link_to 'Edit', edit_article_path(@article), class:'btn btn-primary custom-button' %>
+          </div>
+        </div>
+
+        <div style="margin-top: 25px;">
+          <h4>Comments</h4>
+          <% if @article.comments.size == 0 %>
+              <span>No comment.</span>
+          <% end %>
+          <%= render @article.comments.where(parent_id: nil) %>
+        </div>
+      </div>
+    </div>
+
+    <div>
+        <h3>Add a comment:</h3>
+        <%= render 'comments/form', comment: @article.comments.build %>
+    </div>
+
+  </div>
+</div>
+
